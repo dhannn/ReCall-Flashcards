@@ -1,0 +1,9 @@
+[CCICOMP] Hardware Components
+
+Explain the machine cycle. 
+- CPU fetches instructions from RAM. Control unit decodes the instructions. 
+ALU executes instructions. Results are stored back to RAM.
+
+Diffferentiate random-access memory and hard drive.
+- RAM is volatile memory that is cleared when shutdown while the hard drive 
+stores long-term non-volatile memory. RAM is faster while the hard drive is slower.
