@@ -73,6 +73,12 @@ Tokenlist *t_tokenize_string(char *str)
     return tl;
 }
 
+char *t_next_token(Tokenlist *tl)
+{
+    Token *token = (Token*)q_pop(tl->tokens);
+    return token->str;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                      PRIVATE FUNCTION IMPLEMENTATIONS                      */
 /* -------------------------------------------------------------------------- */
