@@ -45,10 +45,10 @@ struct __tokenlist {
 /* -------------------------------------------------------------------------- */
 /*                         PRIVATE FUNCTION PROTOTYPES                        */
 /* -------------------------------------------------------------------------- */
-static Token *next_token(char **str);
-static char *extract_alnum_token(char *str);
-static char *extract_nonalnum_token(char *str);
-static _TokenType get_token_type(char *token);
+static Token *__next_token(char **str);
+static char *__extract_alnum_token(char *str);
+static char *__extract_nonalnum_token(char *str);
+static _TokenType __get_token_type(char *token);
 
 /* -------------------------------------------------------------------------- */
 /*                       PUBLIC FUNCTION IMPLEMENTATIONS                      */
@@ -63,7 +63,7 @@ Tokenlist *t_tokenize_string(char *str)
 
     char *curr = str;
     while(*curr != '\0') {
-        Token *currentToken = next_token(&curr);
+        Token *currentToken = __next_token(&curr);
         q_push(tl->tokens, currentToken);
 
         count++;
@@ -77,7 +77,7 @@ Tokenlist *t_tokenize_string(char *str)
 /*                      PRIVATE FUNCTION IMPLEMENTATIONS                      */
 /* -------------------------------------------------------------------------- */
 
-static Token *next_token(char **str)
+static Token *__next_token(char **str)
 {
     Token *token = malloc(sizeof(Token));
 
@@ -86,12 +86,12 @@ static Token *next_token(char **str)
     _TokenType type;
 
     if(isalnum(*temp)) {
-        tokenString = extract_alnum_token(temp);
+        tokenString = __extract_alnum_token(temp);
     } else {
-        tokenString = extract_nonalnum_token(temp);
+        tokenString = __extract_nonalnum_token(temp);
     }
 
-    type = get_token_type(tokenString);
+    type = __get_token_type(tokenString);
 
     token->str = tokenString;
     token->type = type;
@@ -101,7 +101,7 @@ static Token *next_token(char **str)
     return token;
 }
 
-static char *extract_alnum_token(char *str)
+static char *__extract_alnum_token(char *str)
 {
     char *temp = s_duplicate(str);
     char *curr = temp;
@@ -113,7 +113,7 @@ static char *extract_alnum_token(char *str)
     return temp;
 }
 
-static char *extract_nonalnum_token(char *str)
+static char *__extract_nonalnum_token(char *str)
 {
     char *temp = s_duplicate(str);
     temp[1] = '\0';
@@ -121,7 +121,7 @@ static char *extract_nonalnum_token(char *str)
     return temp;
 }
 
-static _TokenType get_token_type(char *token)
+static _TokenType __get_token_type(char *token)
 {
     if(isalnum(*token))
         return T_STRING;
