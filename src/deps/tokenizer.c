@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <stdio.h> // TODO: Remove
 
 #define COURSE_OPEN_DELIM   '['
 #define COURSE_CLOSE_DELIM  ']'
@@ -17,17 +16,6 @@
 "\n"
 
 #define SAMPLE2 \
-"\n" \
-"\nExplain the machine cycle." \
-"\n- CPU fetches instructions from RAM. Control unit decodes the instructions."\
-"\nALU executes instructions. Results are stored back to RAM."\
-"\n"\
-"\nDiffferentiate random-access memory and hard drive."\
-"\n- RAM is volatile memory that is cleared when shutdown while the hard drive "\
-"\nstores long-term non-volatile memory. RAM is faster while the hard drive is slower."
-
-#define MEH \
-"[CCICOMP] Hardware Components" \
 "\n" \
 "\nExplain the machine cycle." \
 "\n- CPU fetches instructions from RAM. Control unit decodes the instructions."\
@@ -62,6 +50,10 @@ static char *extract_alnum_token(char *str);
 static char *extract_nonalnum_token(char *str);
 static _TokenType get_token_type(char *token);
 
+/* -------------------------------------------------------------------------- */
+/*                       PUBLIC FUNCTION IMPLEMENTATIONS                      */
+/* -------------------------------------------------------------------------- */
+
 Tokenlist *t_tokenize_string(char *str)
 {
     Tokenlist *tl = malloc(sizeof(Tokenlist));
@@ -74,12 +66,16 @@ Tokenlist *t_tokenize_string(char *str)
         Token *currentToken = next_token(&curr);
         q_push(tl->tokens, currentToken);
 
-        count++; curr++;
+        count++;
     }
 
     tl->size = count;
     return tl;
 }
+
+/* -------------------------------------------------------------------------- */
+/*                      PRIVATE FUNCTION IMPLEMENTATIONS                      */
+/* -------------------------------------------------------------------------- */
 
 static Token *next_token(char **str)
 {
@@ -100,7 +96,7 @@ static Token *next_token(char **str)
     token->str = tokenString;
     token->type = type;
 
-    *str += strlen(tokenString) - 1;
+    *str += strlen(tokenString);
 
     return token;
 }
